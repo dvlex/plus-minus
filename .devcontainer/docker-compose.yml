@@ -1,10 +1,13 @@
 version: '3'
 
 services:
-  app:
+  devcontainer:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        DEVELOPER_UID: ${UID:-1000}
+        DEVELOPER_USERNAME: ${USER:-you}
 
     volumes:
       - ../..:/workspaces:cached

@@ -1,9 +1,28 @@
-FROM mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm
+FROM lexdrel/dotnet8:ubuntu24
 
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+# Update package list and upgrade existing packages
+RUN apt-get update && apt-get upgrade -y
 
-# [Optional] Uncomment this line to install global node packages.
-RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && nvm install --lts && nvm use --lts && npm install -g typescript" 2>&1
-# RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
+# Receive the developer user's UID and USER:
+ARG DEVELOPER_UID=1000
+ARG DEVELOPER_USERNAME=you
+
+# Remove the existing user 'ubuntu'
+RUN userdel -r ubuntu
+
+# Receive the developer user's UID and USER:
+ARG DEVELOPER_UID=1000
+ARG DEVELOPER_USERNAME=you
+    
+# Replicate the developer user in the development image:
+RUN groupadd --gid ${DEVELOPER_UID} ${DEVELOPER_USERNAME} \
+    ;  useradd -r -m -u ${DEVELOPER_UID} --gid ${DEVELOPER_UID} \
+    --shell /bin/bash -c "Developer User,,," ${DEVELOPER_USERNAME}
+
+# Ensure that the home directory, the app path and bundler directories are owned
+# by the developer user:z
+# (A workaround to a side effect of setting WORKDIR before creating the user)
+RUN userhome=$(eval echo ~${DEVELOPER_USERNAME}) \
+    && chown -R ${DEVELOPER_USERNAME}:${DEVELOPER_USERNAME} $userhome \
+    && mkdir -p /workspaces/${localWorkspaceFolderBasename} \
+    && chown -R ${DEVELOPER_USERNAME}:${DEVELOPER_USERNAME} /workspaces/${localWorkspaceFolderBasename}

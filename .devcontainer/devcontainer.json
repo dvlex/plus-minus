@@ -1,9 +1,9 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/dotnet-mssql
 {
-	"name": ".NET (C#), Node.js (TypeScript) & MS SQL",
+	"name": "plus minus",
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
+	"service": "devcontainer",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
@@ -20,6 +20,8 @@
 			]
 		}
 	},
+
+	"shutdownAction": "stopCompose",
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [5000, 5001],
