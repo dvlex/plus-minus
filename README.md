@@ -90,3 +90,4 @@ My initial thoughts on reading the challenge were as follows:
 The first issue I encountered was that the ratios should be floats, but we are using integers in the array. Therefore, we need to convert the counts to floats to get the ratio calculation working. Additionally, I noticed that the output needs to have a precision of 6 decimal places. By adjusting the precision in the output print statement, everything worked perfectly.
 
 ### Evidence
+![image](https://github.com/user-attachments/assets/7ee5fb42-0f8a-4dd7-99ed-41399f963c9d)
