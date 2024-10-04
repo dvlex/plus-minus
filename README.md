@@ -1,5 +1,5 @@
 # Hacker Rank - 1 Month Preparation Kit
-## Mini-Max Sum
+## Plus Minus
 
 ### Introduction
 
