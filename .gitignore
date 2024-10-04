@@ -26,7 +26,7 @@ Desktop.ini
 $RECYCLE.BIN/
 
 # VS Code directories
-.vscode/
+# .vscode/
 .history/
 
 # Rider directories
